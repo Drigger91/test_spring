@@ -35,6 +35,7 @@ public class userService {
             return "User already exist with this mail";
         }
         repository.save(user);
+        System.out.println("Master B Branch");
         return "User posted successfully!";
     }
 
