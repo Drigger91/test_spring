@@ -2,6 +2,7 @@ package com.bfhl.test.services;
 
 import com.bfhl.test.entities.User;
 import com.bfhl.test.repositories.UserRepository;
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,17 +11,17 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
-@NoArgsConstructor
+@AllArgsConstructor
 public class UserService {
-    @Autowired
-    public UserRepository repository;
+    private UserRepository repository;
 
-    public UserService(UserRepository repository) {
-        this.repository = repository;
-    }
 
     public List<User> getAll() {
-        return repository.findAll();
+        var result = repository.findAll();
+        if (result.isEmpty()) {
+            throw new RuntimeException("List is empty");
+        }
+        return result;
     }
     public String function(){
         return "Hi from User Service";
