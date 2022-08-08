@@ -2,7 +2,9 @@ package com.bfhl.test.controller;
 
 
 import com.bfhl.test.entities.User;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.bfhl.test.services.UserService;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,10 +12,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/user")
+@AllArgsConstructor
 public class UserController {
 
-    @Autowired
-    private com.bfhl.test.services.userService userService;
+    public UserService userService;
 
     @GetMapping
     public String function() {
