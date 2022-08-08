@@ -1,8 +1,7 @@
-package com.bfhl.test;
+package com.bfhl.test.controller;
 
-import com.bfhl.test.controller.UserController;
 import com.bfhl.test.entities.User;
-import com.bfhl.test.services.UserService;
+import com.bfhl.test.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,12 +13,11 @@ import static org.mockito.Mockito.when;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
-public class MockitoTestExample {
+
+public class UserControllerTest {
     @BeforeEach
     public void init(){
         MockitoAnnotations.initMocks(this);

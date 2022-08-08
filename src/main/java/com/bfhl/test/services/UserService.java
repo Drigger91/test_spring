@@ -1,9 +1,13 @@
-package com.bfhl.test.services;
+package com.bfhl.test.service;
 
 import com.bfhl.test.entities.User;
 import com.bfhl.test.repositories.UserRepository;
+<<<<<<< Updated upstream:src/main/java/com/bfhl/test/services/UserService.java
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+=======
+import lombok.AllArgsConstructor;
+>>>>>>> Stashed changes:src/main/java/com/bfhl/test/service/UserService.java
 import org.springframework.stereotype.Service;
 
 import java.util.List;
