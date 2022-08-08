@@ -2,6 +2,7 @@ package com.bfhl.test.services;
 
 import com.bfhl.test.entities.User;
 import com.bfhl.test.repositories.UserRepository;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,16 +10,20 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
-public class userService {
+@NoArgsConstructor
+public class UserService {
     @Autowired
-    private final UserRepository repository;
+    public UserRepository repository;
 
-    public userService(UserRepository repository) {
+    public UserService(UserRepository repository) {
         this.repository = repository;
     }
 
     public List<User> getAll() {
         return repository.findAll();
+    }
+    public String function(){
+        return "Hi from User Service";
     }
 
     public String addUser(User user) {
@@ -36,6 +41,7 @@ public class userService {
         }
         repository.save(user);
         System.out.println("Master B Branch");
+        System.out.println("Master A Branch");
         return "User posted successfully!";
     }
 
