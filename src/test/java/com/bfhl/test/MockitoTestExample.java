@@ -45,6 +45,10 @@ public class MockitoTestExample {
         when(service.addUser(dummy)).thenReturn("Username required");
         assertEquals("Username required",service.addUser(dummy));
     }
+    @Test
+    public void truee(){
+        assertEquals(true,true);
+    }
 
 
 }
