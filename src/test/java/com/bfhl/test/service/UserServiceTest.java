@@ -50,4 +50,24 @@ class UserServiceTest {
         dummy.setUsername("Dummy");
         assertEquals("Email Required",service.addUser(dummy));
     }
+    @Test
+    void testAddUser_ReturnsStringAfterNotFindingThePassword(){
+        UserService service = new UserService(repository);
+        User dummy  = new User();
+        dummy.setEmail("dummy@dummy.com");
+        dummy.setPassword(null);
+        dummy.setUsername("Dummy");
+        assertEquals("Password Required",service.addUser(dummy));
+    }
+    @Test
+    void testAddUser_ReturnsStringAfterSaving(){
+        UserService service = new UserService(repository);
+        User dummy  = new User();
+        dummy.setEmail("dummy@dummy.com");
+        dummy.setPassword("dummy");
+        dummy.setUsername("Dummy");
+        when(repository.save(dummy)).thenReturn(dummy);
+        assertEquals("User posted successfully!",service.addUser(dummy));
+    }
+    
 }
