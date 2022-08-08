@@ -4,7 +4,6 @@ package com.bfhl.test.controller;
 import com.bfhl.test.entities.User;
 import com.bfhl.test.service.UserService;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
