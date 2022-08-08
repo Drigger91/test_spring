@@ -2,7 +2,7 @@ package com.bfhl.test;
 
 import com.bfhl.test.controller.UserController;
 import com.bfhl.test.entities.User;
-import com.bfhl.test.services.UserService;
+import com.bfhl.test.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +19,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
-public class MockitoTestExample {
+public class UserControllerTest {
     @BeforeEach
     public void init(){
         MockitoAnnotations.initMocks(this);

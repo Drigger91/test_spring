@@ -1,10 +1,8 @@
-package com.bfhl.test.services;
+package com.bfhl.test.service;
 
 import com.bfhl.test.entities.User;
 import com.bfhl.test.repositories.UserRepository;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

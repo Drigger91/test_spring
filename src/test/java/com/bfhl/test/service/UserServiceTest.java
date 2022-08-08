@@ -1,4 +1,4 @@
-package com.bfhl.test.services;
+package com.bfhl.test.service;
 
 import com.bfhl.test.entities.User;
 import com.bfhl.test.repositories.UserRepository;
@@ -10,7 +10,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)

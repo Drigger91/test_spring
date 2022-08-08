@@ -2,7 +2,7 @@ package com.bfhl.test.controller;
 
 
 import com.bfhl.test.entities.User;
-import com.bfhl.test.services.UserService;
+import com.bfhl.test.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.http.ResponseEntity;
