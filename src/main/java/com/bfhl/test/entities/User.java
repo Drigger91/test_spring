@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 @Data
 @ToString
 @Entity
+@NoArgsConstructor
 @Document("Test1")
 public class User {
     @Id
