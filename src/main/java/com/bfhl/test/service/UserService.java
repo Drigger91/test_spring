@@ -1,30 +1,27 @@
-package com.bfhl.test.service;
+package com.bfhl.test.services;
 
 import com.bfhl.test.entities.User;
 import com.bfhl.test.repositories.UserRepository;
-<<<<<<< Updated upstream:src/main/java/com/bfhl/test/services/UserService.java
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-=======
-import lombok.AllArgsConstructor;
->>>>>>> Stashed changes:src/main/java/com/bfhl/test/service/UserService.java
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
 
 @Service
-@NoArgsConstructor
+@AllArgsConstructor
 public class UserService {
-    @Autowired
-    public UserRepository repository;
+    private UserRepository repository;
 
-    public UserService(UserRepository repository) {
-        this.repository = repository;
-    }
 
     public List<User> getAll() {
-        return repository.findAll();
+        var result = repository.findAll();
+        if (result.isEmpty()) {
+            throw new RuntimeException("List is empty");
+        }
+        return result;
     }
     public String function(){
         return "Hi from User Service";

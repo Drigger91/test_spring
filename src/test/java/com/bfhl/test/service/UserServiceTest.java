@@ -1,4 +1,4 @@
-package com.bfhl.test.service;
+package com.bfhl.test.services;
 
 import com.bfhl.test.entities.User;
 import com.bfhl.test.repositories.UserRepository;
