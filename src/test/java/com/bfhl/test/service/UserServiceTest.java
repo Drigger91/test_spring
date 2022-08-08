@@ -10,7 +10,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -24,9 +26,28 @@ class UserServiceTest {
         // arrange
         UserService service = new UserService(repository);
         List<User> list = new ArrayList<>();
-        when(repository.findAll()).thenReturn(list);
+        lenient().when(repository.findAll()).thenReturn(list);
 
         // act & assert
         assertThrows(RuntimeException.class, service::getAll);
+    }
+    @Test
+    void testAddUser_ReturnsStringAfterNotFindingTheUserName(){
+        UserService service = new UserService(repository);
+        User dummy  = new User();
+        dummy.setEmail("Dummy@dummy.com");
+        dummy.setPassword("dummy");
+        dummy.setUsername(null);
+//        lenient().when(repository.save(dummy)).thenReturn(dummy);
+        assertEquals("Username Required",service.addUser(dummy));
+    }
+    @Test
+    void testAddUser_ReturnsStringAfterNotFindingTheEmail(){
+        UserService service = new UserService(repository);
+        User dummy  = new User();
+        dummy.setEmail(null);
+        dummy.setPassword("dummy");
+        dummy.setUsername("Dummy");
+        assertEquals("Email Required",service.addUser(dummy));
     }
 }

@@ -38,9 +38,10 @@ public class UserService {
         if (findByEmail(user.getEmail()) != null) {
             return "User already exist with this mail";
         }
-        repository.save(user);
-        System.out.println("Master B Branch");
-        System.out.println("Master A Branch");
+        user = repository.save(user);
+        if(user == null){
+            return "User can't be posted";
+        }
         return "User posted successfully!";
     }
 
