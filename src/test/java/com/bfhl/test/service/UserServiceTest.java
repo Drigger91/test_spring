@@ -29,8 +29,8 @@ class UserServiceTest {
     void testGetAll_ReturnsAllRecords() {
         // arrange
         UserService service = new UserService(repository,redisUserRepo);
-        List<User> list = new ArrayList<>();
-        lenient().when(repository.findAll()).thenReturn();
+        List<?> list = new ArrayList<>();
+        lenient().when(repository.findAll()).thenReturn(new ArrayList<>());
 
         // act & assert
         assertEquals(0,list.size());
@@ -66,12 +66,8 @@ class UserServiceTest {
     @Test
     void testAddUser_ReturnsStringAfterSaving() throws JsonProcessingException {
         UserService service = new UserService(repository,redisUserRepo);
-        User dummy  = new User();
-        dummy.setEmail("dummy@dummy.com");
-        dummy.setPassword("dummy");
-        dummy.setUsername("Dummy");
-        when(repository.save(dummy)).thenReturn(dummy);
-        assertEquals("dummy@dummy.com",service.addUser(dummy));
+        User dummy  = new User("id","name","email","pass");
+        assertEquals("dummy@dummy.com",redisUserRepo.save(dummy));
     }
 
 }

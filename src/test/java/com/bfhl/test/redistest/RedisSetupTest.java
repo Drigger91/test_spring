@@ -1,11 +1,8 @@
-package com.bfhl.test.redis_test;
+package com.bfhl.test.redistest;
 
 
 import com.github.fppt.jedismock.RedisServer;
-import lombok.Data;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
-import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PostConstruct;

@@ -42,7 +42,7 @@ public class UserService {
         if (user.getPassword() == null) {
             return "Password Required";
         }
-        if (mongoUserRepo.findByEmail(user.getEmail())!=null) {
+        if (redisUserRepo.findByEmail(user.getEmail())!=null) {
             return "User Already exist" ;
         }
         User mongo_user = mongoUserRepo.save(user);
@@ -52,7 +52,9 @@ public class UserService {
 
     public String deleteUser(String email) {
         User user = redisUserRepo.findByEmail(email);
-        if(Objects.isNull(user)) return "No user found with this mail";
+        if(Objects.isNull(user)) {
+            return "No user found with this mail";
+        };
         redisUserRepo.delete(user);
         mongoUserRepo.delete(user);
         return "User Successfully deleted!";

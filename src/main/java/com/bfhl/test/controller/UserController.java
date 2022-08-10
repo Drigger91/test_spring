@@ -44,7 +44,7 @@ public class UserController {
     @PatchMapping("/update/{email}")
     public ResponseEntity<?> updateUser(@PathVariable String email, @RequestBody User user) throws JsonProcessingException {
 
-        return this.userService.updateUser(email, user) == null ? ResponseEntity.status(400).body("User was not found with this mail") : ResponseEntity.ok(user);
+        return this.userService.updateUser(email, user) == null ? ResponseEntity.status(400).body("User was not found with this mail") : ResponseEntity.ok("User successfully updated!!");
     }
 
     @DeleteMapping("/delete/{email}")

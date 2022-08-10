@@ -5,6 +5,7 @@ package com.bfhl.test.repositories;
 import com.bfhl.test.entities.User;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.netty.channel.unix.Errors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -89,6 +90,11 @@ public class RedisUserRepo implements UserRepository {
 
     @Override
     public void delete(User user) {
-
+        try{
+            Jedis jedis = jedisPool.getResource();
+            jedis.del(user.getEmail());
+        }catch (Error e){
+            throw new Error("Jedis not configured yet!");
+        }
     }
 }
