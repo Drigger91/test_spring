@@ -2,6 +2,7 @@ package com.bfhl.test.controller;
 
 import com.bfhl.test.entities.User;
 import com.bfhl.test.service.UserService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -23,17 +24,17 @@ public class UserControllerTest {
         MockitoAnnotations.initMocks(this);
     }
     @Test
-    public void first(){
+    public void first() throws JsonProcessingException {
 
         UserService service = Mockito.mock(UserService.class);
         UserController controller = new UserController(service);
         when(service.getAll()).thenReturn(Arrays.asList());
         String greet = service.function();
-        List<User> list = service.getAll();
+        List<?> list = service.getAll();
         assertEquals(0, list.size());
     }
     @Test
-    public void TestForUserPosted(){
+    public void TestForUserPosted() throws JsonProcessingException {
         UserService service = Mockito.mock(UserService.class);
         UserController controller = new UserController(service);
         User dummy = new User();
