@@ -31,6 +31,10 @@ public class MongoTest {
     static void clean() {
         mongodExecutable.stop();
     }
+    @AfterEach
+    void clearDB(){
+        mongoTemplate.dropCollection("Test");
+    }
     @BeforeAll
     static void setup() throws Exception {
         String ip = "localhost";
