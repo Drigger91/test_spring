@@ -30,10 +30,11 @@ public class RedisUserRepo implements UserRepository {
         try{
             Jedis jedis = jedisPool.getResource();
             String userAsString = jedis.get(email);
+            log.info("User is : " + userAsString);
             return changeStringToUser(userAsString);
 
         } catch (Exception e) {
-            throw new RuntimeException("Jedis is not perfectly configured yet!");
+            return null;
         }
     }
 

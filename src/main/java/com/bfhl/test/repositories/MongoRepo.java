@@ -17,7 +17,7 @@ import java.util.Optional;
 public class MongoRepo implements UserRepository{
     private final MongoOperations template;
     @Autowired
-    public MongoRepo(MongoTemplate template) {
+    public MongoRepo(MongoOperations template) {
         this.template = template;
     }
 
