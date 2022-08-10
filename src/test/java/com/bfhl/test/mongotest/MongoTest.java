@@ -53,7 +53,7 @@ public class MongoTest {
     }
 
     @Test
-    public void saveUsers() {
+    public void saveUsers(){
         User user = new User("id", "name", "pass", "me@me.com");
         Assertions.assertEquals(user, repository.save(user));
     }
