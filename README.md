@@ -5,4 +5,5 @@ Added redis as a caching db,
 Included unit tests for redis,
 Included integration tests for redis, 
 Removed the dependency on provided templates developed mongo and redis repo from scratch using MongoOperations and jedispool,
-Included and configured jedispool for the project //why is it so important.
+Included and configured jedispool for the project //why is it so important,
+Added integration test for mongodb starting a test server on the go and checking all the functionalities of MongoUserRepo
