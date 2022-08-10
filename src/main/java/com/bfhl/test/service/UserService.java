@@ -1,8 +1,12 @@
 package com.bfhl.test.service;
 
 import com.bfhl.test.entities.User;
-import com.bfhl.test.repositories.UserRepository;
+
+import com.bfhl.test.repositories.MongoRepo;
+import com.bfhl.test.repositories.RedisUserRepo;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,22 +14,25 @@ import java.util.Objects;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class UserService {
-    private UserRepository repository;
+    private MongoRepo mongoUserRepo;
+    private RedisUserRepo redisUserRepo;
 
-
-    public List<User> getAll() {
-        var result = repository.findAll();
-        if (result.isEmpty()) {
-            throw new RuntimeException("List is empty");
+    public List<?> getAll() throws JsonProcessingException {
+        var result = redisUserRepo.findAll();
+        if(result!=null){
+            log.info("redis");
+            return (List<?>) result;
         }
-        return result;
+        log.info("Mongo");
+        return mongoUserRepo.findAll();
     }
     public String function(){
         return "Hi from User Service";
     }
 
-    public String addUser(User user) {
+    public String addUser(User user) throws JsonProcessingException {
         if (user.getUsername() == null) {
             return "Username Required";
         }
@@ -35,37 +42,31 @@ public class UserService {
         if (user.getPassword() == null) {
             return "Password Required";
         }
-        if (findByEmail(user.getEmail()) != null) {
-            return "User already exist with this mail";
+        if (mongoUserRepo.findByEmail(user.getEmail())!=null) {
+            return "User Already exist" ;
         }
-        user = repository.save(user);
-        if(user == null){
-            return "User can't be posted";
-        }
-        return "User posted successfully!";
+        User mongo_user = mongoUserRepo.save(user);
+        User redis_user = redisUserRepo.save(mongo_user);
+        return redis_user.getEmail();
     }
 
     public String deleteUser(String email) {
-        User user = this.findByEmail(email);;
+        User user = redisUserRepo.findByEmail(email);
         if(Objects.isNull(user)) return "No user found with this mail";
-        repository.delete(user);
-        return "User deleted!!";
+        redisUserRepo.delete(user);
+        mongoUserRepo.delete(user);
+        return "User Successfully deleted!";
     }
 
-    public User findByEmail(String email) {
-        List<User> list = repository.findAll();
-        for (User user : list) {
-            if (Objects.equals(user.getEmail(), email)) return user;
-        }
-        return null;
-    }
 
-    public User updateUser(String email, User obj) {
+
+    public User updateUser(String email, User obj) throws JsonProcessingException {
         String username = obj.getUsername();
         String password = obj.getPassword();
-        User user = this.findByEmail(email);
+        User user = redisUserRepo.findByEmail(email);
         if (user == null) return null;
-        repository.delete(user);
+        redisUserRepo.delete(user);
+        mongoUserRepo.delete(user);
         if (username != null) {
             user.setUsername(username);
         }
@@ -73,6 +74,7 @@ public class UserService {
             user.setPassword(password);
         }
         if (username == null && password == null) return null;
-        return repository.save(user);
+        mongoUserRepo.save(user);
+        return redisUserRepo.save(user);
     }
 }
